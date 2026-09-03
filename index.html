@@ -38,7 +38,7 @@ input,textarea,select{
  color:white;
  font-size:16px;
 }
-textarea{min-height:100px;resize:vertical}
+textarea{min-height:100px}
 label{font-weight:bold}
 .boost{
  width:100%;
@@ -56,7 +56,10 @@ label{font-weight:bold}
  font-weight:900;
  margin:10px;
 }
-.result{display:none}
+.result{
+ display:none;
+ margin-top:20px;
+}
 .item{
  background:#0e1528;
  padding:15px;
@@ -98,7 +101,7 @@ label{font-weight:bold}
 <label>What is your video about?</label>
 
 <textarea id="topic"
-placeholder="Example: How to diagnose a check engine light"></textarea>
+placeholder="Example: How to check engine problems"></textarea>
 
 <label>Your niche</label>
 
@@ -159,7 +162,6 @@ placeholder="Example: How to diagnose a check engine light"></textarea>
 
 <div class="warning">
 ViewBoost AI helps optimize content for real viewers.
-No fake views, bots, or artificial engagement.
 </div>
 
 </div>
@@ -196,8 +198,8 @@ let hooks={
 let hook=hooks[niche] || hooks["Other"];
 
 let idea=
-"Start with the most surprising part of your \""+
-topic+"\" immediately. Show the result first, then explain how you achieved it. Keep the video fast, clear and focused on one problem.";
+"Start with the most surprising part of \""+
+topic+"\" immediately. Show the result first, then explain how you achieved it.";
 
 let caption=
 "🔥 "+topic+
