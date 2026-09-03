@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ViewBoost AI</title>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  text-align: center;
+  padding: 30px;
+}
+
+.container {
+  max-width: 500px;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.1);
+}
+
+h1 {
+  margin-bottom: 5px;
+}
+
+p {
+  color: #666;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 12px;
+  background: #1877f2;
+  color: white;
+  font-size: 18px;
+}
+
+.result {
+  margin-top: 20px;
+  padding: 15px;
+  background: #eef4ff;
+  border-radius: 12px;
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🚀 ViewBoost AI</h1>
+
+<p>AI Social Media Growth Assistant</p>
+
+<button onclick="analyze()">
+Analyze My Page
+</button>
+
+<div id="result" class="result">
+<h2>AI Analysis</h2>
+<p>Your page analysis will appear here.</p>
+<p>📈 Content Quality: Good</p>
+<p>🔥 Growth Potential: High</p>
+<p>💡 Recommendation: Post more short videos.</p>
+</div>
+
+</div>
+
+<script>
+
+function analyze() {
+  document.getElementById("result").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
