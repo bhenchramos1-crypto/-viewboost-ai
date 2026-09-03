@@ -2,195 +2,225 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ViewBoost AI</title>
 
 <style>
+*{box-sizing:border-box}
 body{
-  font-family:Arial,sans-serif;
-  background:#f4f6f8;
-  margin:0;
-  padding:20px;
-  color:#222;
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#0b1020;
+ color:white;
 }
-
-.container{
-  max-width:600px;
-  margin:auto;
-  background:white;
-  padding:25px;
-  border-radius:20px;
-  box-shadow:0 5px 20px rgba(0,0,0,.12);
+.app{
+ max-width:600px;
+ margin:auto;
+ padding:22px;
 }
-
-.logo{
-  font-size:38px;
-  font-weight:bold;
-  text-align:center;
+.header{text-align:center;padding:20px 0}
+.logo{font-size:34px;font-weight:800}
+.sub{color:#aeb7d0;margin-top:8px}
+.card{
+ background:#151c32;
+ border:1px solid #293452;
+ border-radius:20px;
+ padding:20px;
+ margin:16px 0;
 }
-
-.subtitle{
-  text-align:center;
-  color:#666;
-  font-size:18px;
-  margin-bottom:25px;
+input,textarea,select{
+ width:100%;
+ padding:14px;
+ margin:8px 0 14px;
+ border-radius:12px;
+ border:1px solid #35415f;
+ background:#0e1528;
+ color:white;
+ font-size:16px;
 }
-
-input,select{
-  width:100%;
-  box-sizing:border-box;
-  padding:14px;
-  margin:8px 0 12px;
-  border:1px solid #ddd;
-  border-radius:10px;
-  font-size:16px;
+textarea{min-height:100px;resize:vertical}
+label{font-weight:bold}
+.boost{
+ width:100%;
+ padding:18px;
+ border:0;
+ border-radius:15px;
+ background:#1877f2;
+ color:white;
+ font-size:20px;
+ font-weight:800;
 }
-
-button{
-  width:100%;
-  padding:15px;
-  margin-top:10px;
-  border:0;
-  border-radius:12px;
-  background:#1877f2;
-  color:white;
-  font-size:18px;
-  font-weight:bold;
+.target{
+ text-align:center;
+ font-size:46px;
+ font-weight:900;
+ margin:10px;
 }
-
-button:active{
-  transform:scale(.98);
-}
-
-.result{
-  display:none;
-  margin-top:25px;
-  background:#eef4ff;
-  padding:20px;
-  border-radius:16px;
-}
-
-.score{
-  text-align:center;
-  font-size:42px;
-  font-weight:bold;
-  color:#1877f2;
-}
-
+.result{display:none}
 .item{
-  padding:10px 0;
-  border-bottom:1px solid #ddd;
+ background:#0e1528;
+ padding:15px;
+ border-radius:13px;
+ margin:10px 0;
 }
-
-.small{
-  color:#666;
-  font-size:14px;
-  text-align:center;
-  margin-top:20px;
+.title{
+ font-weight:800;
+ margin-bottom:7px;
+}
+.copy{
+ background:#293657;
+ border:0;
+ color:white;
+ padding:9px 12px;
+ border-radius:8px;
+ margin-top:8px;
+}
+.warning{
+ color:#aeb7d0;
+ font-size:12px;
+ text-align:center;
+ margin-top:20px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="app">
 
+<div class="header">
 <div class="logo">🚀 ViewBoost AI</div>
-
-<div class="subtitle">
-AI Social Media Growth Assistant
+<div class="sub">Viral Content Booster</div>
 </div>
 
-<label>Facebook Page Name</label>
-<input id="page" placeholder="Example: My Facebook Page">
+<div class="card">
 
-<label>Your Niche</label>
+<label>What is your video about?</label>
+
+<textarea id="topic"
+placeholder="Example: How to diagnose a check engine light"></textarea>
+
+<label>Your niche</label>
+
 <select id="niche">
 <option>Automotive</option>
+<option>Technology</option>
 <option>Beauty</option>
 <option>Gaming</option>
-<option>Technology</option>
 <option>Food</option>
-<option>Fashion</option>
 <option>Affiliate Marketing</option>
 <option>Other</option>
 </select>
 
-<label>Followers</label>
-<input id="followers" type="number" placeholder="Example: 1000">
+<label>Target</label>
 
-<label>Average Views Per Video</label>
-<input id="views" type="number" placeholder="Example: 500">
+<div class="target">1,000,000</div>
 
-<button onclick="analyze()">🔍 Analyze My Page</button>
-
-<div class="result" id="result">
-
-<h2>🤖 AI Analysis</h2>
-
-<div class="score" id="score">--</div>
-
-<p style="text-align:center">Growth Score</p>
-
-<div class="item" id="quality"></div>
-<div class="item" id="potential"></div>
-<div class="item" id="recommendation"></div>
-<div class="item" id="content"></div>
-<div class="item" id="posting"></div>
-
-<button onclick="resetApp()">🔄 New Analysis</button>
+<button class="boost" onclick="boost()">
+🚀 VIRAL BOOST
+</button>
 
 </div>
 
-<div class="small">
-ViewBoost AI • Grow smarter, not artificially
+<div class="card result" id="result">
+
+<h2>🔥 Your 1M Views Strategy</h2>
+
+<div class="item">
+<div class="title">🪝 HOOK</div>
+<div id="hook"></div>
+<button class="copy" onclick="copyText('hook')">Copy</button>
+</div>
+
+<div class="item">
+<div class="title">🎬 VIDEO IDEA</div>
+<div id="idea"></div>
+<button class="copy" onclick="copyText('idea')">Copy</button>
+</div>
+
+<div class="item">
+<div class="title">📝 CAPTION</div>
+<div id="caption"></div>
+<button class="copy" onclick="copyText('caption')">Copy</button>
+</div>
+
+<div class="item">
+<div class="title">#️⃣ HASHTAGS</div>
+<div id="hashtags"></div>
+<button class="copy" onclick="copyText('hashtags')">Copy</button>
+</div>
+
+<div class="item">
+<div class="title">📈 VIRAL CHECKLIST</div>
+<div id="checklist"></div>
+</div>
+
+</div>
+
+<div class="warning">
+ViewBoost AI helps optimize content for real viewers.
+No fake views, bots, or artificial engagement.
 </div>
 
 </div>
 
 <script>
 
-function analyze(){
+function boost(){
 
-let page=document.getElementById("page").value;
-let followers=Number(document.getElementById("followers").value);
-let views=Number(document.getElementById("views").value);
+let topic=document.getElementById("topic").value.trim();
 let niche=document.getElementById("niche").value;
 
-if(!page || !followers || !views){
-alert("Please enter your page name, followers and average views.");
+if(!topic){
+alert("Enter your video topic first.");
 return;
 }
 
-let ratio=views/followers;
-let score=50;
+let hooks={
+"Automotive":
+"🚨 STOP! Don't replace that part until you check THIS first!",
+"Technology":
+"Most people don't know this simple trick...",
+"Beauty":
+"Wait! Don't buy another product until you see this.",
+"Gaming":
+"99% of players don't know this trick!",
+"Food":
+"You've probably been doing this wrong your whole life!",
+"Affiliate Marketing":
+"Before you buy this, watch this first!",
+"Other":
+"STOP SCROLLING! You need to see this!"
+};
 
-if(ratio>=1) score+=35;
-else if(ratio>=0.5) score+=25;
-else if(ratio>=0.2) score+=15;
-else score+=5;
+let hook=hooks[niche] || hooks["Other"];
 
-if(score>95) score=95;
+let idea=
+"Start with the most surprising part of your \""+
+topic+"\" immediately. Show the result first, then explain how you achieved it. Keep the video fast, clear and focused on one problem.";
 
-document.getElementById("score").innerText=score+"/100";
+let caption=
+"🔥 "+topic+
+" — would you try this? Watch until the end and tell me what you think. Follow for more "+niche+" tips!";
 
-document.getElementById("quality").innerHTML=
-"📊 <b>Content Performance:</b> "+
-(score>=75?"Excellent":"Needs improvement");
+let hashtags=
+"#"+niche.replace(/\s/g,"")+
+" #ViralReels #FacebookReels #Trending #Tips #MustWatch";
 
-document.getElementById("potential").innerHTML=
-"🔥 <b>Growth Potential:</b> "+
-(score>=75?"Very High":"High");
+let checklist=
+"✅ Strong first 2 seconds<br>"+
+"✅ Show the result early<br>"+
+"✅ Remove unnecessary intro<br>"+
+"✅ Use clear on-screen text<br>"+
+"✅ End with a question<br>"+
+"✅ Test multiple hooks<br>"+
+"✅ Track retention and shares";
 
-document.getElementById("recommendation").innerHTML=
-"💡 <b>Recommendation:</b> Create more short-form videos with a strong hook in the first 2 seconds.";
-
-document.getElementById("content").innerHTML=
-"🎯 <b>Content Strategy:</b> Focus on "+niche+
-" tips, tutorials, before/after content and problem-solving videos.";
-
-document.getElementById("posting").innerHTML=
-"📅 <b>Posting Plan:</b> Aim for 1–2 quality short videos per day and test different hooks.";
+document.getElementById("hook").innerText=hook;
+document.getElementById("idea").innerText=idea;
+document.getElementById("caption").innerText=caption;
+document.getElementById("hashtags").innerText=hashtags;
+document.getElementById("checklist").innerHTML=checklist;
 
 document.getElementById("result").style.display="block";
 
@@ -201,12 +231,13 @@ behavior:"smooth"
 
 }
 
-function resetApp(){
-document.getElementById("result").style.display="none";
-document.getElementById("page").value="";
-document.getElementById("followers").value="";
-document.getElementById("views").value="";
-window.scrollTo({top:0,behavior:"smooth"});
+function copyText(id){
+
+let text=document.getElementById(id).innerText;
+
+navigator.clipboard.writeText(text);
+
+alert("Copied!");
 }
 
 </script>
