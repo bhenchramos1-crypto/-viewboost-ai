@@ -2,244 +2,359 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ViewBoost AI</title>
 
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;
- font-family:Arial,sans-serif;
- background:#0b1020;
- color:white;
+* {
+  box-sizing: border-box;
 }
-.app{
- max-width:600px;
- margin:auto;
- padding:22px;
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #080c1c;
+  color: white;
 }
-.header{text-align:center;padding:20px 0}
-.logo{font-size:34px;font-weight:800}
-.sub{color:#aeb7d0;margin-top:8px}
-.card{
- background:#151c32;
- border:1px solid #293452;
- border-radius:20px;
- padding:20px;
- margin:16px 0;
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 25px 18px 50px;
 }
-input,textarea,select{
- width:100%;
- padding:14px;
- margin:8px 0 14px;
- border-radius:12px;
- border:1px solid #35415f;
- background:#0e1528;
- color:white;
- font-size:16px;
+
+.header {
+  text-align: center;
+  padding: 30px 10px;
 }
-textarea{min-height:100px}
-label{font-weight:bold}
-.boost{
- width:100%;
- padding:18px;
- border:0;
- border-radius:15px;
- background:#1877f2;
- color:white;
- font-size:20px;
- font-weight:800;
+
+.logo {
+  font-size: 42px;
+  font-weight: 800;
 }
-.target{
- text-align:center;
- font-size:46px;
- font-weight:900;
- margin:10px;
+
+.subtitle {
+  color: #aeb8d5;
+  font-size: 19px;
+  margin-top: 8px;
 }
-.result{
- display:none;
- margin-top:20px;
+
+.card {
+  background: #151b32;
+  border: 1px solid #303b67;
+  border-radius: 25px;
+  padding: 25px;
+  box-shadow: 0 15px 40px rgba(0,0,0,.35);
 }
-.item{
- background:#0e1528;
- padding:15px;
- border-radius:13px;
- margin:10px 0;
+
+label {
+  display: block;
+  font-size: 18px;
+  font-weight: bold;
+  margin: 18px 0 10px;
 }
-.title{
- font-weight:800;
- margin-bottom:7px;
+
+textarea,
+select {
+  width: 100%;
+  background: #0d1225;
+  color: white;
+  border: 1px solid #3a4773;
+  border-radius: 15px;
+  padding: 16px;
+  font-size: 16px;
+  outline: none;
 }
-.copy{
- background:#293657;
- border:0;
- color:white;
- padding:9px 12px;
- border-radius:8px;
- margin-top:8px;
+
+textarea {
+  height: 100px;
+  resize: none;
 }
-.warning{
- color:#aeb7d0;
- font-size:12px;
- text-align:center;
- margin-top:20px;
+
+select {
+  height: 55px;
+}
+
+.target {
+  text-align: center;
+  font-size: 52px;
+  font-weight: 900;
+  margin: 20px 0;
+}
+
+.boost {
+  width: 100%;
+  padding: 18px;
+  border: none;
+  border-radius: 16px;
+  background: #3478f6;
+  color: white;
+  font-size: 21px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.boost:active {
+  transform: scale(.98);
+}
+
+.result {
+  display: none;
+  margin-top: 25px;
+}
+
+.result-title {
+  text-align: center;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.counter {
+  text-align: center;
+  font-size: 55px;
+  font-weight: 900;
+  margin: 20px 0 10px;
+}
+
+.progress-bg {
+  width: 100%;
+  height: 18px;
+  background: #080c1c;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  width: 0%;
+  background: #3478f6;
+  transition: width .2s;
+}
+
+.percent {
+  text-align: center;
+  color: #aeb8d5;
+  margin-top: 10px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.stat {
+  background: #0d1225;
+  border-radius: 15px;
+  padding: 18px;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.stat-label {
+  color: #aeb8d5;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.note {
+  text-align: center;
+  color: #8f9aba;
+  font-size: 13px;
+  margin-top: 25px;
+  line-height: 1.5;
+}
+
+.reset {
+  width: 100%;
+  margin-top: 15px;
+  padding: 14px;
+  border: 1px solid #3a4773;
+  background: transparent;
+  color: white;
+  border-radius: 14px;
+  font-size: 16px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<div class="container">
 
-<div class="header">
-<div class="logo">🚀 ViewBoost AI</div>
-<div class="sub">Viral Content Booster</div>
-</div>
+  <div class="header">
+    <div class="logo">🚀 ViewBoost AI</div>
+    <div class="subtitle">Viral Content Booster</div>
+  </div>
 
-<div class="card">
+  <div class="card">
 
-<label>What is your video about?</label>
+    <label>🎬 What is your video about?</label>
 
-<textarea id="topic"
-placeholder="Example: How to check engine problems"></textarea>
+    <textarea id="topic"
+      placeholder="Example: How to check engine problems"></textarea>
 
-<label>Your niche</label>
+    <label>🎯 Your niche</label>
 
-<select id="niche">
-<option>Automotive</option>
-<option>Technology</option>
-<option>Beauty</option>
-<option>Gaming</option>
-<option>Food</option>
-<option>Affiliate Marketing</option>
-<option>Other</option>
-</select>
+    <select id="niche">
+      <option>Automotive</option>
+      <option>Technology</option>
+      <option>Beauty</option>
+      <option>Gaming</option>
+      <option>Fitness</option>
+      <option>Food</option>
+      <option>Entertainment</option>
+    </select>
 
-<label>Target</label>
+    <label>🚀 Target views</label>
 
-<div class="target">1,000,000</div>
+    <select id="targetSelect">
+      <option value="100000">100,000</option>
+      <option value="500000">500,000</option>
+      <option value="1000000" selected>1,000,000</option>
+      <option value="5000000">5,000,000</option>
+      <option value="10000000">10,000,000</option>
+    </select>
 
-<button class="boost" onclick="boost()">
-🚀 VIRAL BOOST
-</button>
+    <div class="target" id="targetDisplay">1M</div>
 
-</div>
+    <button class="boost" onclick="startBoost()">
+      🚀 START VIRAL BOOST
+    </button>
 
-<div class="card result" id="result">
+    <div class="result" id="result">
 
-<h2>🔥 Your 1M Views Strategy</h2>
+      <div class="result-title">
+        🔥 Boost Simulation Running
+      </div>
 
-<div class="item">
-<div class="title">🪝 HOOK</div>
-<div id="hook"></div>
-<button class="copy" onclick="copyText('hook')">Copy</button>
-</div>
+      <div class="counter" id="counter">0</div>
 
-<div class="item">
-<div class="title">🎬 VIDEO IDEA</div>
-<div id="idea"></div>
-<button class="copy" onclick="copyText('idea')">Copy</button>
-</div>
+      <div class="progress-bg">
+        <div class="progress" id="progress"></div>
+      </div>
 
-<div class="item">
-<div class="title">📝 CAPTION</div>
-<div id="caption"></div>
-<button class="copy" onclick="copyText('caption')">Copy</button>
-</div>
+      <div class="percent" id="percent">0%</div>
 
-<div class="item">
-<div class="title">#️⃣ HASHTAGS</div>
-<div id="hashtags"></div>
-<button class="copy" onclick="copyText('hashtags')">Copy</button>
-</div>
+      <div class="stats">
 
-<div class="item">
-<div class="title">📈 VIRAL CHECKLIST</div>
-<div id="checklist"></div>
-</div>
+        <div class="stat">
+          <div class="stat-number" id="reach">0</div>
+          <div class="stat-label">Estimated Reach</div>
+        </div>
 
-</div>
+        <div class="stat">
+          <div class="stat-number" id="engagement">0%</div>
+          <div class="stat-label">Engagement Potential</div>
+        </div>
 
-<div class="warning">
-ViewBoost AI helps optimize content for real viewers.
-</div>
+      </div>
+
+      <button class="reset" onclick="resetBoost()">
+        🔄 New Boost
+      </button>
+
+    </div>
+
+    <div class="note">
+      ViewBoost AI is a content-growth simulator.
+      It does not generate artificial Facebook views,
+      bots, or fake engagement.
+    </div>
+
+  </div>
 
 </div>
 
 <script>
 
-function boost(){
+const targetSelect = document.getElementById("targetSelect");
+const targetDisplay = document.getElementById("targetDisplay");
 
-let topic=document.getElementById("topic").value.trim();
-let niche=document.getElementById("niche").value;
+targetSelect.addEventListener("change", function() {
+  let value = Number(this.value);
 
-if(!topic){
-alert("Enter your video topic first.");
-return;
-}
-
-let hooks={
-"Automotive":
-"🚨 STOP! Don't replace that part until you check THIS first!",
-"Technology":
-"Most people don't know this simple trick...",
-"Beauty":
-"Wait! Don't buy another product until you see this.",
-"Gaming":
-"99% of players don't know this trick!",
-"Food":
-"You've probably been doing this wrong your whole life!",
-"Affiliate Marketing":
-"Before you buy this, watch this first!",
-"Other":
-"STOP SCROLLING! You need to see this!"
-};
-
-let hook=hooks[niche] || hooks["Other"];
-
-let idea=
-"Start with the most surprising part of \""+
-topic+"\" immediately. Show the result first, then explain how you achieved it.";
-
-let caption=
-"🔥 "+topic+
-" — would you try this? Watch until the end and tell me what you think. Follow for more "+niche+" tips!";
-
-let hashtags=
-"#"+niche.replace(/\s/g,"")+
-" #ViralReels #FacebookReels #Trending #Tips #MustWatch";
-
-let checklist=
-"✅ Strong first 2 seconds<br>"+
-"✅ Show the result early<br>"+
-"✅ Remove unnecessary intro<br>"+
-"✅ Use clear on-screen text<br>"+
-"✅ End with a question<br>"+
-"✅ Test multiple hooks<br>"+
-"✅ Track retention and shares";
-
-document.getElementById("hook").innerText=hook;
-document.getElementById("idea").innerText=idea;
-document.getElementById("caption").innerText=caption;
-document.getElementById("hashtags").innerText=hashtags;
-document.getElementById("checklist").innerHTML=checklist;
-
-document.getElementById("result").style.display="block";
-
-window.scrollTo({
-top:document.body.scrollHeight,
-behavior:"smooth"
+  if (value >= 1000000) {
+    targetDisplay.textContent =
+      (value / 1000000) + "M";
+  } else {
+    targetDisplay.textContent =
+      (value / 1000) + "K";
+  }
 });
 
+function formatNumber(number) {
+  return number.toLocaleString();
 }
 
-function copyText(id){
+function startBoost() {
 
-let text=document.getElementById(id).innerText;
+  const topic = document.getElementById("topic").value.trim();
 
-navigator.clipboard.writeText(text);
+  if (!topic) {
+    alert("Please enter what your video is about.");
+    return;
+  }
 
-alert("Copied!");
+  const target = Number(targetSelect.value);
+
+  document.getElementById("result").style.display = "block";
+
+  let current = 0;
+
+  const duration = 7000;
+  const startTime = Date.now();
+
+  function animate() {
+
+    const elapsed = Date.now() - startTime;
+    let progress = elapsed / duration;
+
+    if (progress > 1) progress = 1;
+
+    current = Math.floor(target * progress);
+
+    document.getElementById("counter").textContent =
+      formatNumber(current);
+
+    document.getElementById("progress").style.width =
+      (progress * 100) + "%";
+
+    document.getElementById("percent").textContent =
+      Math.floor(progress * 100) + "%";
+
+    document.getElementById("reach").textContent =
+      formatNumber(Math.floor(current * 1.35));
+
+    document.getElementById("engagement").textContent =
+      (3 + progress * 4).toFixed(1) + "%";
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    } else {
+      document.querySelector(".result-title").textContent =
+        "🔥 Target Reached — Simulation Complete";
+    }
+  }
+
+  animate();
+}
+
+function resetBoost() {
+
+  document.getElementById("result").style.display = "none";
+
+  document.getElementById("counter").textContent = "0";
+  document.getElementById("progress").style.width = "0%";
+  document.getElementById("percent").textContent = "0%";
+
+  document.querySelector(".result-title").textContent =
+    "🔥 Boost Simulation Running";
 }
 
 </script>
