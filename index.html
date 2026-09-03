@@ -1,51 +1,92 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ViewBoost AI</title>
 
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  text-align: center;
-  padding: 30px;
+body{
+  font-family:Arial,sans-serif;
+  background:#f4f6f8;
+  margin:0;
+  padding:20px;
+  color:#222;
 }
 
-.container {
-  max-width: 500px;
-  margin: auto;
-  background: white;
-  padding: 25px;
-  border-radius: 20px;
-  box-shadow: 0 5px 20px rgba(0,0,0,.1);
+.container{
+  max-width:600px;
+  margin:auto;
+  background:white;
+  padding:25px;
+  border-radius:20px;
+  box-shadow:0 5px 20px rgba(0,0,0,.12);
 }
 
-h1 {
-  margin-bottom: 5px;
+.logo{
+  font-size:38px;
+  font-weight:bold;
+  text-align:center;
 }
 
-p {
-  color: #666;
+.subtitle{
+  text-align:center;
+  color:#666;
+  font-size:18px;
+  margin-bottom:25px;
 }
 
-button {
-  width: 100%;
-  padding: 15px;
-  margin-top: 15px;
-  border: none;
-  border-radius: 12px;
-  background: #1877f2;
-  color: white;
-  font-size: 18px;
+input,select{
+  width:100%;
+  box-sizing:border-box;
+  padding:14px;
+  margin:8px 0 12px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  font-size:16px;
 }
 
-.result {
-  margin-top: 20px;
-  padding: 15px;
-  background: #eef4ff;
-  border-radius: 12px;
-  display: none;
+button{
+  width:100%;
+  padding:15px;
+  margin-top:10px;
+  border:0;
+  border-radius:12px;
+  background:#1877f2;
+  color:white;
+  font-size:18px;
+  font-weight:bold;
+}
+
+button:active{
+  transform:scale(.98);
+}
+
+.result{
+  display:none;
+  margin-top:25px;
+  background:#eef4ff;
+  padding:20px;
+  border-radius:16px;
+}
+
+.score{
+  text-align:center;
+  font-size:42px;
+  font-weight:bold;
+  color:#1877f2;
+}
+
+.item{
+  padding:10px 0;
+  border-bottom:1px solid #ddd;
+}
+
+.small{
+  color:#666;
+  font-size:14px;
+  text-align:center;
+  margin-top:20px;
 }
 </style>
 </head>
@@ -54,28 +95,118 @@ button {
 
 <div class="container">
 
-<h1>🚀 ViewBoost AI</h1>
+<div class="logo">🚀 ViewBoost AI</div>
 
-<p>AI Social Media Growth Assistant</p>
+<div class="subtitle">
+AI Social Media Growth Assistant
+</div>
 
-<button onclick="analyze()">
-Analyze My Page
-</button>
+<label>Facebook Page Name</label>
+<input id="page" placeholder="Example: My Facebook Page">
 
-<div id="result" class="result">
-<h2>AI Analysis</h2>
-<p>Your page analysis will appear here.</p>
-<p>📈 Content Quality: Good</p>
-<p>🔥 Growth Potential: High</p>
-<p>💡 Recommendation: Post more short videos.</p>
+<label>Your Niche</label>
+<select id="niche">
+<option>Automotive</option>
+<option>Beauty</option>
+<option>Gaming</option>
+<option>Technology</option>
+<option>Food</option>
+<option>Fashion</option>
+<option>Affiliate Marketing</option>
+<option>Other</option>
+</select>
+
+<label>Followers</label>
+<input id="followers" type="number" placeholder="Example: 1000">
+
+<label>Average Views Per Video</label>
+<input id="views" type="number" placeholder="Example: 500">
+
+<button onclick="analyze()">🔍 Analyze My Page</button>
+
+<div class="result" id="result">
+
+<h2>🤖 AI Analysis</h2>
+
+<div class="score" id="score">--</div>
+
+<p style="text-align:center">Growth Score</p>
+
+<div class="item" id="quality"></div>
+<div class="item" id="potential"></div>
+<div class="item" id="recommendation"></div>
+<div class="item" id="content"></div>
+<div class="item" id="posting"></div>
+
+<button onclick="resetApp()">🔄 New Analysis</button>
+
+</div>
+
+<div class="small">
+ViewBoost AI • Grow smarter, not artificially
 </div>
 
 </div>
 
 <script>
 
-function analyze() {
-  document.getElementById("result").style.display = "block";
+function analyze(){
+
+let page=document.getElementById("page").value;
+let followers=Number(document.getElementById("followers").value);
+let views=Number(document.getElementById("views").value);
+let niche=document.getElementById("niche").value;
+
+if(!page || !followers || !views){
+alert("Please enter your page name, followers and average views.");
+return;
+}
+
+let ratio=views/followers;
+let score=50;
+
+if(ratio>=1) score+=35;
+else if(ratio>=0.5) score+=25;
+else if(ratio>=0.2) score+=15;
+else score+=5;
+
+if(score>95) score=95;
+
+document.getElementById("score").innerText=score+"/100";
+
+document.getElementById("quality").innerHTML=
+"📊 <b>Content Performance:</b> "+
+(score>=75?"Excellent":"Needs improvement");
+
+document.getElementById("potential").innerHTML=
+"🔥 <b>Growth Potential:</b> "+
+(score>=75?"Very High":"High");
+
+document.getElementById("recommendation").innerHTML=
+"💡 <b>Recommendation:</b> Create more short-form videos with a strong hook in the first 2 seconds.";
+
+document.getElementById("content").innerHTML=
+"🎯 <b>Content Strategy:</b> Focus on "+niche+
+" tips, tutorials, before/after content and problem-solving videos.";
+
+document.getElementById("posting").innerHTML=
+"📅 <b>Posting Plan:</b> Aim for 1–2 quality short videos per day and test different hooks.";
+
+document.getElementById("result").style.display="block";
+
+window.scrollTo({
+top:document.body.scrollHeight,
+behavior:"smooth"
+});
+
+}
+
+function resetApp(){
+document.getElementById("result").style.display="none";
+document.getElementById("page").value="";
+document.getElementById("followers").value="";
+document.getElementById("views").value="";
+window.scrollTo({top:0,behavior:"smooth"});
 }
 
 </script>
