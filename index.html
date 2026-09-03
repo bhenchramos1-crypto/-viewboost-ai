@@ -1,373 +1,236 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ViewBoost AI</title>
 
 <style>
-*{box-sizing:border-box}
-
 body{
- margin:0;
- font-family:Arial,sans-serif;
- background:#050817;
- color:#fff;
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#080d1d;
+  color:white;
+  padding:25px;
 }
-
-.app{
- max-width:620px;
- margin:auto;
- padding:25px 18px 60px;
+.container{
+  max-width:600px;
+  margin:auto;
 }
-
-.header{
- text-align:center;
- padding:25px 0 30px;
+h1{
+  text-align:center;
+  font-size:38px;
 }
-
-.logo{
- font-size:42px;
- font-weight:900;
+.subtitle{
+  text-align:center;
+  color:#aeb8d6;
+  font-size:20px;
+  margin-bottom:30px;
 }
-
-.sub{
- color:#9da9c9;
- font-size:18px;
- margin-top:8px;
-}
-
 .card{
- background:linear-gradient(145deg,#171e38,#0d1328);
- border:1px solid #34436f;
- border-radius:28px;
- padding:24px;
- box-shadow:0 20px 60px rgba(0,0,0,.45);
+  background:#151c35;
+  border:1px solid #303b66;
+  border-radius:22px;
+  padding:22px;
+  margin-bottom:20px;
 }
-
 label{
- display:block;
- font-weight:bold;
- font-size:18px;
- margin:12px 0 10px;
+  display:block;
+  font-size:18px;
+  font-weight:bold;
+  margin:18px 0 8px;
 }
-
-textarea,select{
- width:100%;
- background:#080d20;
- color:#fff;
- border:1px solid #394873;
- border-radius:15px;
- padding:16px;
- font-size:17px;
- outline:none;
+input,select,textarea{
+  width:100%;
+  box-sizing:border-box;
+  padding:16px;
+  border-radius:14px;
+  border:1px solid #3b4770;
+  background:#0d1328;
+  color:white;
+  font-size:17px;
 }
-
 textarea{
- height:95px;
- resize:none;
+  min-height:120px;
 }
-
-select{
- height:55px;
+button{
+  width:100%;
+  margin-top:25px;
+  padding:18px;
+  border:0;
+  border-radius:15px;
+  background:linear-gradient(90deg,#2878ff,#7a3cff);
+  color:white;
+  font-size:21px;
+  font-weight:bold;
 }
-
-.targetTitle{
- text-align:center;
- color:#aab5d3;
- margin-top:25px;
+.result{
+  display:none;
 }
-
-.target{
- text-align:center;
- font-size:55px;
- font-weight:900;
- margin:5px 0 20px;
+.box{
+  background:#0c1328;
+  border-radius:16px;
+  padding:18px;
+  margin-top:15px;
+  line-height:1.5;
 }
-
-.boost{
- width:100%;
- border:0;
- border-radius:17px;
- padding:19px;
- background:linear-gradient(90deg,#246bfd,#754cff);
- color:#fff;
- font-size:22px;
- font-weight:900;
- box-shadow:0 8px 30px rgba(55,105,255,.35);
+.title{
+  color:#70a7ff;
+  font-size:20px;
+  font-weight:bold;
 }
-
-.boost:active{
- transform:scale(.97);
+.copy{
+  background:#26345d;
+  font-size:15px;
+  padding:10px;
+  margin-top:12px;
 }
-
-.dashboard{
- display:none;
- margin-top:22px;
-}
-
-.status{
- text-align:center;
- font-size:18px;
- color:#8fb0ff;
- margin-bottom:10px;
-}
-
-.counter{
- text-align:center;
- font-size:58px;
- font-weight:900;
- letter-spacing:-2px;
- margin:5px 0;
-}
-
-.viewsLabel{
- text-align:center;
- color:#9da9c9;
-}
-
-.bar{
- height:20px;
- background:#070b19;
- border-radius:20px;
- margin:22px 0 8px;
- overflow:hidden;
- border:1px solid #29365d;
-}
-
-.fill{
- height:100%;
- width:0%;
- background:linear-gradient(90deg,#2575ff,#a34cff);
- transition:.15s;
-}
-
-.percent{
- text-align:center;
- color:#aab5d3;
-}
-
-.stats{
- display:grid;
- grid-template-columns:1fr 1fr;
- gap:12px;
- margin-top:22px;
-}
-
-.stat{
- background:#080d20;
- border:1px solid #29365d;
- border-radius:16px;
- padding:18px 10px;
- text-align:center;
-}
-
-.num{
- font-size:25px;
- font-weight:bold;
-}
-
-.small{
- color:#8e9abb;
- font-size:13px;
- margin-top:5px;
-}
-
-.complete{
- display:none;
- text-align:center;
- margin-top:25px;
- padding:20px;
- border-radius:18px;
- background:#102b22;
- border:1px solid #28d391;
-}
-
-.complete h2{
- color:#35e6a0;
- margin:0 0 8px;
-}
-
-.reset{
- width:100%;
- margin-top:15px;
- padding:14px;
- border-radius:14px;
- border:1px solid #3b4b78;
- background:transparent;
- color:#fff;
- font-size:16px;
+.note{
+  text-align:center;
+  color:#9da8c8;
+  margin-top:25px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<div class="container">
 
-<div class="header">
- <div class="logo">🚀 ViewBoost AI</div>
- <div class="sub">Viral Content Booster</div>
-</div>
+<h1>🚀 ViewBoost AI</h1>
+<div class="subtitle">Real Content Growth Assistant</div>
 
 <div class="card">
 
 <label>🎬 What is your video about?</label>
-
 <textarea id="topic"
-placeholder="Example: How to diagnose engine problems"></textarea>
+placeholder="Example: How to check engine problems"></textarea>
 
 <label>🎯 Your niche</label>
-
 <select id="niche">
- <option>Automotive</option>
- <option>Technology</option>
- <option>Gaming</option>
- <option>Beauty</option>
- <option>Fitness</option>
- <option>Food</option>
- <option>Entertainment</option>
+<option>Automotive</option>
+<option>Technology</option>
+<option>Beauty</option>
+<option>Fitness</option>
+<option>Food</option>
+<option>Gaming</option>
+<option>Business</option>
 </select>
 
-<label>🚀 Target views</label>
-
-<select id="target">
- <option value="100000">100,000</option>
- <option value="500000">500,000</option>
- <option value="1000000" selected>1,000,000</option>
- <option value="5000000">5,000,000</option>
- <option value="10000000">10,000,000</option>
+<label>📱 Platform</label>
+<select id="platform">
+<option>Facebook Reels</option>
+<option>YouTube Shorts</option>
+<option>TikTok</option>
 </select>
 
-<div class="targetTitle">TARGET</div>
-<div class="target" id="targetText">1,000,000</div>
-
-<button class="boost" onclick="boost()">
- 🚀 VIRAL BOOST
-</button>
-
-<div class="dashboard" id="dashboard">
-
-<div class="status" id="status">
- ⚡ Boosting your content...
-</div>
-
-<div class="counter" id="counter">0</div>
-
-<div class="viewsLabel">SIMULATED VIEWS</div>
-
-<div class="bar">
- <div class="fill" id="fill"></div>
-</div>
-
-<div class="percent" id="percent">0%</div>
-
-<div class="stats">
-
-<div class="stat">
- <div class="num" id="speed">0</div>
- <div class="small">VIEWS / SEC</div>
-</div>
-
-<div class="stat">
- <div class="num" id="reach">0</div>
- <div class="small">EST. REACH</div>
-</div>
+<button onclick="boost()">🚀 CREATE VIRAL CONTENT</button>
 
 </div>
 
-<div class="complete" id="complete">
- <h2>🔥 1M VIEWS REACHED!</h2>
- <div>Your viral boost simulation is complete.</div>
+<div class="card result" id="result">
+
+<h2>🔥 Your Viral Content Package</h2>
+
+<div class="box">
+<div class="title">🪝 HOOK</div>
+<p id="hook"></p>
+<button class="copy" onclick="copyText('hook')">Copy Hook</button>
 </div>
 
-<button class="reset" onclick="resetBoost()">
- 🔄 NEW BOOST
-</button>
+<div class="box">
+<div class="title">🎬 VIDEO SCRIPT</div>
+<p id="script"></p>
+<button class="copy" onclick="copyText('script')">Copy Script</button>
+</div>
+
+<div class="box">
+<div class="title">📝 CAPTION</div>
+<p id="caption"></p>
+<button class="copy" onclick="copyText('caption')">Copy Caption</button>
+</div>
+
+<div class="box">
+<div class="title">#️⃣ HASHTAGS</div>
+<p id="hashtags"></p>
+<button class="copy" onclick="copyText('hashtags')">Copy Hashtags</button>
+</div>
+
+<div class="box">
+<div class="title">📈 GROWTH PLAN</div>
+<p id="plan"></p>
+</div>
 
 </div>
 
+<div class="note">
+ViewBoost AI • Built for real viewers, not fake views.
 </div>
 
 </div>
 
 <script>
 
-const target=document.getElementById("target");
-const targetText=document.getElementById("targetText");
-
-target.addEventListener("change",()=>{
- targetText.textContent=
- Number(target.value).toLocaleString();
-});
-
 function boost(){
 
- const topic=document.getElementById("topic").value.trim();
+let topic=document.getElementById("topic").value.trim();
+let niche=document.getElementById("niche").value;
+let platform=document.getElementById("platform").value;
 
- if(!topic){
-  alert("Enter your video topic first.");
-  return;
- }
-
- const goal=Number(target.value);
-
- document.getElementById("dashboard").style.display="block";
- document.getElementById("complete").style.display="none";
-
- let start=Date.now();
- let duration=6000;
-
- function animate(){
-
-  let elapsed=Date.now()-start;
-  let p=Math.min(elapsed/duration,1);
-
-  let views=Math.floor(goal*p);
-
-  document.getElementById("counter").textContent=
-   views.toLocaleString();
-
-  document.getElementById("fill").style.width=
-   (p*100)+"%";
-
-  document.getElementById("percent").textContent=
-   Math.floor(p*100)+"%";
-
-  let speed=Math.floor(goal/duration*1000);
-
-  document.getElementById("speed").textContent=
-   speed.toLocaleString();
-
-  document.getElementById("reach").textContent=
-   Math.floor(views*1.4).toLocaleString();
-
-  if(p<1){
-   requestAnimationFrame(animate);
-  }else{
-
-   document.getElementById("status").textContent=
-    "✅ Boost simulation complete";
-
-   document.getElementById("complete").style.display="block";
-  }
- }
-
- animate();
+if(!topic){
+alert("Enter your video topic first.");
+return;
 }
 
-function resetBoost(){
+document.getElementById("result").style.display="block";
 
- document.getElementById("dashboard").style.display="none";
+let hook="🚨 STOP! Before you "+topic.toLowerCase()+", watch this first!";
 
- document.getElementById("counter").textContent="0";
- document.getElementById("fill").style.width="0%";
- document.getElementById("percent").textContent="0%";
+let script=
+"HOOK: "+hook+
+"\\n\\n"+
+"STEP 1: Show the problem immediately.\\n"+
+"STEP 2: Demonstrate the correct way to check it.\\n"+
+"STEP 3: Show the result clearly.\\n"+
+"STEP 4: Give one important tip viewers can use today.\\n\\n"+
+"ENDING: Follow for more "+niche+" tips and share this with someone who needs it.";
 
- document.getElementById("complete").style.display="none";
+let caption=
+"🔥 "+topic+
+"\\n\\n"+
+"Most people make this mistake without knowing it. "+
+"Watch until the end and save this for later. "+
+"Follow for more "+niche+" tips!";
 
- document.getElementById("status").textContent=
-  "⚡ Boosting your content...";
+let hashtags=
+"#"+niche.replace(/\\s/g,"")+
+" #"+platform.replace(/\\s/g,"")+
+" #ViralReels #Trending #Tips #HowTo #MustWatch #ForYou";
+
+let plan=
+"1️⃣ Keep the video 15–35 seconds.\\n"+
+"2️⃣ Show the result/problem in the first 2 seconds.\\n"+
+"3️⃣ Remove long introductions.\\n"+
+"4️⃣ Add captions on screen.\\n"+
+"5️⃣ Test 3 different hooks for the same topic.\\n"+
+"6️⃣ Post consistently and study retention, shares and comments.\\n\\n"+
+"⚠️ 1M views cannot be guaranteed. This tool optimizes the content for real audience growth.";
+
+document.getElementById("hook").innerText=hook;
+document.getElementById("script").innerText=script;
+document.getElementById("caption").innerText=caption;
+document.getElementById("hashtags").innerText=hashtags;
+document.getElementById("plan").innerText=plan;
+
+document.getElementById("result").scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+function copyText(id){
+let text=document.getElementById(id).innerText;
+navigator.clipboard.writeText(text);
+alert("Copied!");
 }
 
 </script>
